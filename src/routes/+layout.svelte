@@ -4,6 +4,7 @@
 	let { children } = $props();
 
 	import { page } from '$app/state';
+
 </script>
 
 <svelte:head>
@@ -31,10 +32,8 @@
 		{@render children()}
 	</div>
 </main>
+
 <style>
-	.main {
-		margin: 0 25px;
-	}
 	.logo {
 		width: 100%;
 		text-align: center;
@@ -47,7 +46,6 @@
 
 	.nav {
 		display: flex;
-		width: 100%;
 		text-align: center;
 		gap: 20px;
 		margin: 0 0 0 25px;
