@@ -34,6 +34,9 @@
 </main>
 
 <style>
+	.main {
+		margin: 0 25px;
+	}
 	.logo {
 		width: 100%;
 		text-align: center;
@@ -43,20 +46,17 @@
 		font-size: 28px;
 		font-family: "Google Sans Flex", sans-serif;
 	}
-
 	.nav {
 		display: flex;
 		text-align: center;
 		gap: 20px;
 		margin: 0 0 0 25px;
 		a {
-			/*text-transform: uppercase;*/
 			text-decoration: none;
 			font-size: 15px;
 			color: black;
 		}
 	}
-
 	.nav a.nav-active {
 		color: #7e7e7e;
 	}

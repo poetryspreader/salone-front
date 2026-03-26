@@ -17,10 +17,9 @@
     .home-title {
         font-weight: bold;
         font-size: 24px;
-        padding: 0 20px;
     }
     .home-description {
-        margin: 15px 20px 0;
+        margin: 15px 0 0;
         font-style: italic;
     }
 </style>
