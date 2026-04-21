@@ -59,6 +59,7 @@
                 <input
                     id={`till-${index}`}
                     type="number"
+                    inputmode="numeric"
                     value={row.till}
                     oninput={(e) => updateRow(index, 'till', (e.currentTarget as HTMLInputElement).value)}
                 />
