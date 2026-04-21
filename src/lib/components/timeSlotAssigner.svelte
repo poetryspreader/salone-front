@@ -239,7 +239,7 @@
     }
 
     .slot-card {
-        padding: 14px 35px;
+        padding: 14px 10px;
         border: 1px solid #e6e6e6;
         border-radius: 16px;
         background: #fff;

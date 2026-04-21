@@ -58,7 +58,7 @@
             <div class="field">
                 <input
                     id={`till-${index}`}
-                    type="text"
+                    type="number"
                     value={row.till}
                     oninput={(e) => updateRow(index, 'till', (e.currentTarget as HTMLInputElement).value)}
                 />
