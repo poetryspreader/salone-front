@@ -3,6 +3,10 @@
     import WorkerPicker from '$lib/components/tipsWorkerPicker.svelte';
     import TipsPeriodCard from '$lib/components/tipsPeriodCard.svelte';
     import TimeSlotAssigner from '$lib/components/timeSlotAssigner.svelte';
+    import { dev } from '$app/environment';
+    import { injectAnalytics } from '@vercel/analytics/sveltekit';
+
+    injectAnalytics({ mode: dev ? 'development' : 'production' });
 
     type Worker = {
         _id: string,
