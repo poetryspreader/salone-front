@@ -58,8 +58,8 @@
             <div class="field">
                 <input
                     id={`till-${index}`}
-                    type="number"
-                    inputmode="numeric"
+                    step="0.01"
+                    inputmode="decimal"
                     value={row.till}
                     oninput={(e) => updateRow(index, 'till', (e.currentTarget as HTMLInputElement).value)}
                 />
@@ -67,8 +67,8 @@
             <div class="field">
                 <input
                     id={`amount-${index}`}
-                    type="number"
-                    inputmode="numeric"
+                    step="0.01"
+                    inputmode="decimal"
                     value={row.amount}
                     oninput={(e) => updateRow(index, 'amount', (e.currentTarget as HTMLInputElement).value)}
                 />

@@ -93,9 +93,6 @@
             totalPerWorker = result.totalPerWorker;
             meta = result.meta;
 
-            // console.log("Saved:", data);
-            // console.log("Saved:", meta);
-
         } catch (error) {
             console.error("Failed to send tips:", error);
         }
