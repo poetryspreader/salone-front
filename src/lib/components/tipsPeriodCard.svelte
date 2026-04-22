@@ -10,7 +10,7 @@
         transportFund = $bindable()
     }: {
         periods: TipRow[],
-        totalTips: number;
+        totalTips: string;
         transportFund: number;
     } = $props();
 
@@ -57,9 +57,8 @@
         <div class="fields">
             <div class="field">
                 <input
-                    id={`till-${index}`}
-                    type="text"
-                    inputmode="decimal"
+                    type="number"
+                    inputmode="numeric"
                     value={row.till}
                     oninput={(e) =>
                         updateRow(index, 'till',
@@ -95,11 +94,14 @@
     <div class="extra-card">
         <div class="label">Total:</div>
         <input
+            id={`amount-${totalTips}`}
             class="extra-card-input"
-            type="number"
-            inputmode="numeric"
+            type="text"
+            inputmode="decimal"
             value={totalTips}
-            oninput={(e) => totalTips = (e.currentTarget as HTMLInputElement).value}
+            oninput={(e) =>
+                totalTips = e.currentTarget.value.replace(',', '.')
+            }
         />
     </div>
     <div class="extra-card">
