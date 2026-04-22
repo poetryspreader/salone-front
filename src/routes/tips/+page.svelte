@@ -26,12 +26,13 @@
     type Meta = {
         totalKitchenTips: number;
         transportFund: number;
-        totalPerWorker: any[];
+        totalFreeBalance: number;
     };
 
     type TotalPerWorker = {
         worker: string;
         totalPayout: number;
+        freeBalance: number
     };
 
     let workers = $state<Worker[]>([]);
@@ -64,7 +65,8 @@
 
     async function sendTips() {
         try {
-            const res = await fetch("https://salone-core.onrender.com/api/tips", {
+            // const res = await fetch("https://salone-core.onrender.com/api/tips", {
+            const res = await fetch("http://localhost:3000/api/tips", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -170,7 +172,7 @@
                         </div>
 
                         <div class="payout">
-                            💵 <b>{w.payout.toFixed(2)}</b>
+                            <b>{w.payout.toFixed(2)}€</b>
                         </div>
                     </div>
                 {/each}
@@ -190,10 +192,16 @@
                     </div>
 
                     <div class="payout">
-                        💵 {w.totalPayout.toFixed(2)}
+                        {w.totalPayout}€
                     </div>
                 </div>
             {/each}
+        </div>
+    {/if}
+    {#if data.length > 0}
+        <div class="free-balance-card">
+            <div class="title">💰 Free balance</div>
+            <div class="value">{meta?.totalFreeBalance.toFixed(2)}</div>
         </div>
     {/if}
 {/if}
@@ -269,6 +277,7 @@
     }
 
     .summary {
+        font-family: "Roboto", sans-serif;
         display: grid;
         align-items: center;
         grid-template-columns: repeat(2, 1fr);
@@ -299,6 +308,7 @@
     }
 
     .workers-total {
+        font-family: "Roboto", sans-serif;
         margin-top: 30px;
         padding: 16px;
         border-radius: 16px;
@@ -327,7 +337,33 @@
     }
 
     .worker-row .payout {
+        color: #0d7a35;
         font-weight: 700;
+    }
+
+    .free-balance-card {
+        font-family: "Roboto", sans-serif;
+        width: 100%;
+        background: #e0f2fe;
+        border: 1px solid #bae6fd;
+        border-radius: 12px;
+        padding: 16px;
+        margin-top: 16px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .free-balance-card .title {
+        color: #0369a1;
+        font-weight: 600;
+    }
+
+    .free-balance-card .value {
+        color: #075985;
+        font-size: 18px;
+        font-weight: bold;
     }
 
     @media (max-width: 480px) {
