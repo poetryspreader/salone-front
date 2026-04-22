@@ -57,10 +57,14 @@
         <div class="fields">
             <div class="field">
                 <input
-                    id={`till-${index}`}
+                    type="text"
                     inputmode="decimal"
                     value={row.till}
-                    oninput={(e) => updateRow(index, 'till', (e.currentTarget as HTMLInputElement).value)}
+                    oninput={(e) =>
+                        updateRow(index, 'till',
+                            e.currentTarget.value.replace(',', '.')
+                        )
+                    }
                 />
             </div>
             <div class="field">
@@ -68,7 +72,11 @@
                     id={`amount-${index}`}
                     inputmode="decimal"
                     value={row.amount}
-                    oninput={(e) => updateRow(index, 'amount', (e.currentTarget as HTMLInputElement).value)}
+                    oninput={(e) =>
+                        updateRow(index, 'till',
+                            e.currentTarget.value.replace(',', '.')
+                        )
+                    }
                 />
             </div>
             <button
