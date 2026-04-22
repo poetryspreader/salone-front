@@ -57,6 +57,7 @@
         <div class="fields">
             <div class="field">
                 <input
+                    id={`till-${index}`}
                     type="text"
                     inputmode="decimal"
                     value={row.till}
@@ -70,10 +71,11 @@
             <div class="field">
                 <input
                     id={`amount-${index}`}
+                    type="text"
                     inputmode="decimal"
                     value={row.amount}
                     oninput={(e) =>
-                        updateRow(index, 'till',
+                        updateRow(index, 'amount',
                             e.currentTarget.value.replace(',', '.')
                         )
                     }
