@@ -128,14 +128,14 @@
         return false;
     }
 
-    function updateCoefficient(slotKey: string, workerId: string, value: number) {
+    function updateCoefficient(slotKey: string, workerId: string, value: string) {
         slots = slots.map(s =>
             s.key === slotKey
                 ? {
                     ...s,
                     workers: s.workers.map(w =>
                         w.worker === workerId
-                            ? { ...w, baseCoefficient: value }
+                            ? { ...w, baseCoefficient: Number(value) }
                             : w
                     )
                 }
@@ -192,13 +192,13 @@
                                 <div>
                                     coefficient:
                                     <input
+                                        id={`coef-${item.baseCoefficient}`}
                                         class="coefficient-input"
-                                        type="number"
-                                        step="0.1"
-                                        min="0"
+                                        type="text"
+                                        inputmode="decimal"
                                         value={item.baseCoefficient}
                                         oninput={(e) => {
-                                            const value = Number((e.currentTarget as HTMLInputElement).value);
+                                            const value = e.currentTarget.value.replace(',', '.')
                                             updateCoefficient(slot.key, item.worker, value);
                                         }}
                                     />
