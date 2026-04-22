@@ -65,8 +65,8 @@
 
     async function sendTips() {
         try {
-            // const res = await fetch("https://salone-core.onrender.com/api/tips", {
-            const res = await fetch("http://localhost:3000/api/tips", {
+            const res = await fetch("https://salone-core.onrender.com/api/tips", {
+            // const res = await fetch("http://localhost:3000/api/tips", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
