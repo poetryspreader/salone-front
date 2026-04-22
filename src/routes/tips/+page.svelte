@@ -103,6 +103,18 @@
 
 </script>
 
+<div class="updates-card">
+    <div class="updates-header">
+        <span class="updates-badge">Updates:</span>
+    </div>
+
+    <ul class="updates-list">
+        <li>Деньги на развоз теперь считаются процентуально с каждого периода,</li>
+        <li>итоговый чаевые по каждому сотруднику теперь округлены,</li>
+        <li>добавлен свободный баланс после округления.</li>
+    </ul>
+</div>
+
 <TipsPeriodCard bind:periods bind:totalTips bind:transportFund />
 <WorkerPicker {workers} bind:selectedWorkers />
 <TimeSlotAssigner {workers} {periods} {selectedWorkers} bind:slots />
@@ -208,6 +220,38 @@
 
 
 <style>
+    .updates-card {
+        background: #fee2e2; /* светло-красный фон */
+        border: 1px solid #fecaca;
+        border-radius: 12px;
+        padding: 16px;
+        margin-bottom: 40px;
+    }
+
+    .updates-header {
+        font-family: "Roboto", sans-serif;
+        margin-bottom: 20px;
+    }
+
+    .updates-badge {
+        background: #ef4444;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .updates-list {
+        margin: 8px 0 12px 0;
+        padding-left: 18px;
+        color: #7f1d1d;
+    }
+
+    .updates-list li {
+        margin-bottom: 4px;
+    }
+
     .submit-btn {
         display: block;
         margin: 50px auto;
