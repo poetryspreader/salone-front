@@ -48,6 +48,7 @@
     let data = $state<Slot[]>([]);
     let meta = $state<Meta | null>(null);
     let totalPerWorker = $state<TotalPerWorker[]>([]);
+    let isLoading = $state(false);
 
     onMount(async () => {
         try {
@@ -68,9 +69,12 @@
     });
 
     async function sendTips() {
+        if (isLoading) return;
+
+        isLoading = true;
         try {
-            const res = await fetch("https://salone-core.onrender.com/api/tips", {
-            // const res = await fetch("http://localhost:3000/api/tips", {
+            // const res = await fetch("https://salone-core.onrender.com/api/tips", {
+            const res = await fetch("http://localhost:3000/api/tips", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -95,6 +99,8 @@
 
         } catch (error) {
             console.error("Failed to send tips:", error);
+        } finally {
+            isLoading = false;
         }
     }
 
@@ -121,8 +127,17 @@
 <TimeSlotAssigner {workers} {periods} {selectedWorkers} bind:slots />
 
 {#if slots.length !== 0}
-    <button class="submit-btn" onclick={sendTips}>
-        CALCULATE TIPS
+    <button
+            class="submit-btn"
+            onclick={sendTips}
+            disabled={isLoading}
+            class:loading={isLoading}
+    >
+        {#if isLoading}
+            CALCULATING...
+        {:else}
+            CALCULATE TIPS
+        {/if}
     </button>
 {/if}
 
@@ -269,6 +284,11 @@
 
     .submit-btn:hover {
         background: #1d4ed8;
+    }
+
+    .submit-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
     }
 
     .slot-card {
