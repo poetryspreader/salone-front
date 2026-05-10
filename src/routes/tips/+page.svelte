@@ -71,6 +71,8 @@
     async function sendTips() {
         if (isLoading) return;
 
+        await Promise.resolve();
+
         isLoading = true;
         try {
             // const res = await fetch("https://salone-core.onrender.com/api/tips", {
@@ -128,6 +130,7 @@
 
 {#if slots.length !== 0}
     <button
+            type="button"
             class="submit-btn"
             on:click={sendTips}
             disabled={isLoading}
