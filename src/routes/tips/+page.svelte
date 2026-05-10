@@ -129,7 +129,7 @@
 {#if slots.length !== 0}
     <button
             class="submit-btn"
-            onclick={sendTips}
+            on:click={sendTips}
             disabled={isLoading}
             class:loading={isLoading}
     >
