@@ -6,6 +6,8 @@
     import { dev } from '$app/environment';
     import { injectAnalytics } from '@vercel/analytics/sveltekit';
 
+    import { PUBLIC_API_URL } from '$env/static/public';
+
     injectAnalytics({ mode: dev ? 'development' : 'production' });
 
     type Worker = {
@@ -53,7 +55,7 @@
     onMount(async () => {
         try {
             // const res = await fetch("http://localhost:3000/api/workers");
-            const res = await fetch("https://salone-core.onrender.com/api/workers");
+            const res = await fetch(`${PUBLIC_API_URL}/api/workers`);
 
             if (!res.ok) {
                 throw new Error(`HTTP error: ${res.status}`);
@@ -76,7 +78,7 @@
         isLoading = true;
         try {
             // const res = await fetch("https://salone-core.onrender.com/api/tips", {
-            const res = await fetch("http://localhost:3000/api/tips", {
+            const res = await fetch(`${PUBLIC_API_URL}/api/tips"`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
