@@ -54,7 +54,6 @@
 
     onMount(async () => {
         try {
-            // const res = await fetch("http://localhost:3000/api/workers");
             const res = await fetch(`${PUBLIC_API_URL}/api/workers`);
 
             if (!res.ok) {
@@ -77,7 +76,6 @@
 
         isLoading = true;
         try {
-            // const res = await fetch("https://salone-core.onrender.com/api/tips", {
             const res = await fetch(`${PUBLIC_API_URL}/api/tips`, {
                 method: "POST",
                 headers: {
@@ -146,7 +144,6 @@
     </button>
 {/if}
 
-<!--<pre>{JSON.stringify(data, null, 2)}</pre>-->
 {#if data.length > 0}
     <div class="summary">
         <div class="summary-card">
