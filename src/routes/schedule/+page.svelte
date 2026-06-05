@@ -1,4 +1,5 @@
 <script>
+    import { token } from "$lib/stores/auth";
 </script>
 
 

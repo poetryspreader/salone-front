@@ -1,10 +1,17 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
+	import LoginModal from '$lib/components/auth/loginModal.svelte';
+	import { onMount } from "svelte";
+	import { initAuth, token, logout } from "$lib/stores/auth";
+	import { page } from '$app/state';
+	import logoutIcon from '$lib/assets/logout.png';
 
 	let { children } = $props();
+	let showLogin = $state(false);
 
-	import { page } from '$app/state';
-
+	onMount(() => {
+		initAuth();
+	});
 </script>
 
 <svelte:head>
@@ -18,13 +25,26 @@
 </svelte:head>
 
 <header>
-	<div class="logo">
-		Salone
+	<div class="top">
+		<div class="logo">Salone</div>
+
+		{#if $token}
+<!--			<button onclick={logout}>Logout</button>-->
+			<button onclick={logout} class="btn">
+				<img src={logoutIcon} alt="logout" class="icon" />
+			</button>
+		{:else}
+			<button onclick={() => (showLogin = true)}>login</button>
+		{/if}
 	</div>
 	<nav class="nav">
 		<a class:nav-active={page.url.pathname === "/"} href="/">Home</a>
-		<a class:nav-active={page.url.pathname === "/tips"} href="/tips">Tips</a>
-		<a class:nav-active={page.url.pathname === "/schedule"} href="/schedule">Schedule</a>
+		{#if $token}
+			<a class:nav-active={page.url.pathname.startsWith("/admin")} href="/admin">
+				Admin
+			</a>
+		{/if}
+
 	</nav>
 </header>
 
@@ -35,6 +55,11 @@
 		</div>
 	</div>
 </main>
+
+<LoginModal
+	bind:open={showLogin}
+	onClose={() => (showLogin = false)}
+/>
 
 <footer>
 	<div class="social-media">
@@ -48,22 +73,51 @@
 </footer>
 
 <style>
-	.background {
-		/*background: black;*/
+	header {
+		position: relative;
 	}
+
 	.main {
 		max-width: 550px;
 		margin: 35px auto 0;
 		padding: 0 25px;
 	}
-	.logo {
+	.top {
 		width: 100%;
+		padding: 20px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		button {
+			height: 18px;
+			margin-left: auto;
+			border: none;
+			background: transparent;
+			cursor: pointer;
+			img {
+				width: 18px;
+				height: 18px;
+				object-fit: contain;
+				transition: transform 0.25s ease;
+				transform: scale(1);
+			}
+			img:hover {
+				transform: scale(1.2);
+			}
+		}
+	}
+	.top button:hover {
+		color: #2263ae;
+		text-decoration: underline;
+	}
+	.logo {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
 		text-align: center;
-		margin: 20px auto;
 		text-transform: uppercase;
 		font-weight: bold;
 		font-size: 28px;
-		/*font-family: "Google Sans Flex", sans-serif;*/
 	}
 	.nav {
 		display: flex;
