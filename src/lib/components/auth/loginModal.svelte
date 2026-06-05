@@ -126,7 +126,7 @@
         border-radius: 10px;
         border: 1px solid #e5e7eb;
         outline: none;
-        font-size: 14px;
+        font-size: 16px;
         transition: 0.2s ease;
         background: #fafafa;
     }
