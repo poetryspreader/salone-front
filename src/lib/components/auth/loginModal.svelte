@@ -30,10 +30,12 @@
     <div class="overlay" onclick={onClose}>
         <div class="modal" onclick={(e) => e.stopPropagation()}>
             <h2>Sign in to continue</h2>
-            <div class="form">
+            <form class="form">
                 <label>
                     <span>Email or login</span>
                     <input
+                        name="username"
+                        autocomplete="username"
                         placeholder="you@example.com"
                         bind:value={identifier}
                     />
@@ -43,18 +45,20 @@
                     <span>Password</span>
                     <input
                         type="password"
+                        name="password"
+                        autocomplete="current-password"
                         placeholder="••••••••"
                         bind:value={password}
                     />
                 </label>
 
-                <button class="primary" onclick={login}>
+                <button type="submit" class="primary" onclick={login}>
                     Login
                 </button>
-                <button class="secondary" onclick={onClose}>
+                <button type="button" class="secondary" onclick={onClose}>
                     Cancel
                 </button>
-            </div>
+            </form>
 
         </div>
     </div>
