@@ -1,4 +1,5 @@
 import { writable } from "svelte/store";
+import { goto } from "$app/navigation";
 
 export const token = writable<string | null>(null);
 
@@ -16,4 +17,5 @@ export function initAuth() {
 export function logout() {
     localStorage.removeItem("token");
     token.set(null);
+    void goto("/");
 }

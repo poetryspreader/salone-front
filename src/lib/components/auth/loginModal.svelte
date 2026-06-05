@@ -27,35 +27,31 @@
 </script>
 
 {#if open}
-    <div class="overlay" on:click={onClose}>
-        <div class="modal" on:click={(e) => e.stopPropagation()}>
-
-            <h2>Welcome back</h2>
-            <p class="subtitle">Sign in to continue</p>
-
+    <div class="overlay" onclick={onClose}>
+        <div class="modal" onclick={(e) => e.stopPropagation()}>
+            <h2>Sign in to continue</h2>
             <div class="form">
                 <label>
                     <span>Email or login</span>
                     <input
-                            placeholder="you@example.com"
-                            bind:value={identifier}
+                        placeholder="you@example.com"
+                        bind:value={identifier}
                     />
                 </label>
 
                 <label>
                     <span>Password</span>
                     <input
-                            type="password"
-                            placeholder="••••••••"
-                            bind:value={password}
+                        type="password"
+                        placeholder="••••••••"
+                        bind:value={password}
                     />
                 </label>
 
-                <button class="primary" on:click={login}>
+                <button class="primary" onclick={login}>
                     Login
                 </button>
-
-                <button class="secondary" on:click={onClose}>
+                <button class="secondary" onclick={onClose}>
                     Cancel
                 </button>
             </div>
@@ -78,7 +74,7 @@
     }
 
     .modal {
-        width: 380px;
+        width: 350px;
         background: #ffffff;
         border-radius: 18px;
         padding: 28px;
@@ -117,6 +113,10 @@
         color: #6b7280;
     }
 
+    label span {
+        font-size: 14px;
+        color: #111827;
+    }
     input {
         padding: 10px 12px;
         border-radius: 10px;
@@ -144,6 +144,7 @@
     }
 
     .primary {
+        margin-top: 20px;
         background: linear-gradient(135deg, #6366f1, #4f46e5);
         color: white;
     }
