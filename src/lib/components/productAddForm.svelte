@@ -1,6 +1,7 @@
 <script lang="ts">
     import { token } from "$lib/stores/auth";
     import { products } from "$lib/stores/products";
+    import {PUBLIC_API_URL} from "$env/static/public";
 
     let nameEn = "";
     let nameRu = "";
@@ -21,14 +22,12 @@
     let loading = false;
 
     async function createProduct(event: SubmitEvent) {
-        alert("CLICIKED");
         event.preventDefault();
         submitted = true;
 
         const form = event.currentTarget as HTMLFormElement;
 
         if (!form.checkValidity()) {
-            alert("FORM INVALID");
             return;
         }
 
@@ -36,7 +35,6 @@
 
         const formData = new FormData();
 
-        // EN / RU structure (backend соберёт сам)
         formData.append("name[en]", nameEn);
         formData.append("name[ru]", nameRu);
 
@@ -50,13 +48,12 @@
         formData.append("available", String(available));
 
         if (imageFile) {
-            alert("IMAGE FILE");
             formData.append("image", imageFile);
         }
 
         try {
             loading = true;
-            const res = await fetch("http://localhost:3000/api/products", {
+            const res = await fetch(`${PUBLIC_API_URL}/api/products`, {
                 method: "POST",
                 headers: {
                     Authorization: `Bearer ${$token}`
