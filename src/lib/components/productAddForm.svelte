@@ -50,6 +50,7 @@
         formData.append("available", String(available));
 
         if (imageFile) {
+            alert("IMAGE FILE");
             formData.append("image", imageFile);
         }
 
