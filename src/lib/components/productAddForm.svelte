@@ -27,68 +27,69 @@
         const form = event.currentTarget as HTMLFormElement;
 
         if (!form.checkValidity()) {
+            alert("FORM INVALID");
             return;
         }
 
         event.preventDefault();
-        alert('CLICKED')
-        // const formData = new FormData();
+
+        const formData = new FormData();
 
         // EN / RU structure (backend соберёт сам)
-        // formData.append("name[en]", nameEn);
-        // formData.append("name[ru]", nameRu);
-        //
-        // formData.append("description[en]", descriptionEn);
-        // formData.append("description[ru]", descriptionRu);
-        //
-        // formData.append("category[en]", categoryEn);
-        // formData.append("category[ru]", categoryRu);
-        //
-        // formData.append("price", price);
-        // formData.append("available", String(available));
-        //
-        // if (imageFile) {
-        //     formData.append("image", imageFile);
-        // }
-        //
-        // try {
-        //     loading = true;
-        //     const res = await fetch("http://localhost:3000/api/products", {
-        //         method: "POST",
-        //         headers: {
-        //             Authorization: `Bearer ${$token}`
-        //         },
-        //         body: formData
-        //     });
-        //
-        //     if (!res.ok) {
-        //         throw new Error("Failed to create product");
-        //     }
-        //
-        //     alert("STATUS: " + res.status);
-        //
-        //     const data = await res.json();
-        //
-        //     products.update(items => [data, ...items]);
-        //
-        //     submitted = false;
-        //
-        //     // reset form
-        //     nameEn = "";
-        //     nameRu = "";
-        //     descriptionEn = "";
-        //     descriptionRu = "";
-        //     categoryEn = "";
-        //     categoryRu = "";
-        //     price = "";
-        //     available = true;
-        //     imageFile = null;
-        //
-        // } catch (err) {
-        //     console.error(err);
-        // } finally {
-        //     loading = false;
-        // }
+        formData.append("name[en]", nameEn);
+        formData.append("name[ru]", nameRu);
+
+        formData.append("description[en]", descriptionEn);
+        formData.append("description[ru]", descriptionRu);
+
+        formData.append("category[en]", categoryEn);
+        formData.append("category[ru]", categoryRu);
+
+        formData.append("price", price);
+        formData.append("available", String(available));
+
+        if (imageFile) {
+            formData.append("image", imageFile);
+        }
+
+        try {
+            loading = true;
+            const res = await fetch("http://localhost:3000/api/products", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${$token}`
+                },
+                body: formData
+            });
+
+            if (!res.ok) {
+                throw new Error("Failed to create product");
+            }
+
+            alert("STATUS: " + res.status);
+
+            const data = await res.json();
+
+            products.update(items => [data, ...items]);
+
+            submitted = false;
+
+            // reset form
+            nameEn = "";
+            nameRu = "";
+            descriptionEn = "";
+            descriptionRu = "";
+            categoryEn = "";
+            categoryRu = "";
+            price = "";
+            available = true;
+            imageFile = null;
+
+        } catch (err) {
+            console.error(err);
+        } finally {
+            loading = false;
+        }
     }
 </script>
 
