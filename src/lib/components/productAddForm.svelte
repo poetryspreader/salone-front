@@ -65,8 +65,9 @@
                 throw new Error("Failed to create product");
             }
 
+            alert("STATUS: " + res.status);
+
             const data = await res.json();
-            // console.log("Created product:", data);
 
             products.update(items => [data, ...items]);
 
