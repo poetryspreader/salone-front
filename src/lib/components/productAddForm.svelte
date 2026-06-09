@@ -60,13 +60,10 @@
                 },
                 body: formData
             });
-            alert("STATUS: " + res.status);
 
             if (!res.ok) {
                 throw new Error("Failed to create product");
             }
-
-
 
             const data = await res.json();
 
