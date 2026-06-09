@@ -21,6 +21,7 @@
     let loading = false;
 
     async function createProduct(event: SubmitEvent) {
+        alert("CLICIKED");
         event.preventDefault();
         submitted = true;
 
