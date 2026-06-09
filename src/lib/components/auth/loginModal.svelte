@@ -3,7 +3,7 @@
     export let open = false;
     export let onClose: () => void;
 
-    import { setToken } from "$lib/stores/auth";
+    import { setToken } from "$lib/stores/auth.ts";
 
     let identifier = "";
     let password = "";

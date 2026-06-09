@@ -2,7 +2,7 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import LoginModal from '$lib/components/auth/loginModal.svelte';
 	import { onMount } from "svelte";
-	import { initAuth, token, logout } from "$lib/stores/auth";
+	import { initAuth, token, logout } from "$lib/stores/auth.ts";
 	import { page } from '$app/state';
 	import logoutIcon from '$lib/assets/logout.png';
 

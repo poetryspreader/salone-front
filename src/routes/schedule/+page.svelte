@@ -1,5 +1,5 @@
 <script>
-    import { token } from "$lib/stores/auth";
+    import { token } from "$lib/stores/auth.ts";
 </script>
 
 
