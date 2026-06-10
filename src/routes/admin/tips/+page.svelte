@@ -55,12 +55,14 @@
 
     onMount(async () => {
         try {
+            if (!$token) {
+                return;
+            }
             const res = await fetch(`${PUBLIC_API_URL}/api/workers`, {
                 headers: {
                     Authorization: `Bearer ${$token}`
                 },
-                }
-            );
+            });
 
             if (!res.ok) {
                 throw new Error(`HTTP error: ${res.status}`);
@@ -82,10 +84,14 @@
 
         isLoading = true;
         try {
+            if (!$token) {
+                return;
+            }
             const res = await fetch(`${PUBLIC_API_URL}/api/tips`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${$token}`
                 },
                 body: JSON.stringify({
                     periods,
