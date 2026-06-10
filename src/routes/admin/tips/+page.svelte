@@ -7,6 +7,7 @@
     import { injectAnalytics } from '@vercel/analytics/sveltekit';
 
     import { PUBLIC_API_URL } from '$env/static/public';
+    import { token } from "$lib/stores/auth";
 
     injectAnalytics({ mode: dev ? 'development' : 'production' });
 
@@ -54,7 +55,12 @@
 
     onMount(async () => {
         try {
-            const res = await fetch(`${PUBLIC_API_URL}/api/workers`);
+            const res = await fetch(`${PUBLIC_API_URL}/api/workers`, {
+                headers: {
+                    Authorization: `Bearer ${$token}`
+                },
+                }
+            );
 
             if (!res.ok) {
                 throw new Error(`HTTP error: ${res.status}`);
