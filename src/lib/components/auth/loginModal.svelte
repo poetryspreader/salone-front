@@ -3,12 +3,13 @@
     export let open = false;
     export let onClose: () => void;
 
-    import { setToken } from "$lib/stores/auth.ts";
+    import { setToken } from "$lib/stores/auth";
 
     let identifier = "";
     let password = "";
 
-    async function login() {
+    async function login(event: SubmitEvent) {
+        event.preventDefault();
         const res = await fetch(`${PUBLIC_API_URL}/api/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -30,7 +31,7 @@
     <div class="overlay" onclick={onClose}>
         <div class="modal" onclick={(e) => e.stopPropagation()}>
             <h2>Sign in to continue</h2>
-            <form class="form">
+            <form class="form" onsubmit={login}>
                 <label>
                     <span>Email or login</span>
                     <input
@@ -52,14 +53,13 @@
                     />
                 </label>
 
-                <button type="submit" class="primary" onclick={login}>
+                <button type="submit" class="primary">
                     Login
                 </button>
-                <button type="button" class="secondary" onclick={onClose}>
+                <button class="secondary" type="button" onclick={onClose}>
                     Cancel
                 </button>
             </form>
-
         </div>
     </div>
 {/if}
