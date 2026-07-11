@@ -1,4 +1,6 @@
 <script lang="ts">
+    import TipsVoiceRecorder from '$lib/components/tipsVoiceRecorder.svelte';
+
     type Worker = {
         _id: string;
         name: string;
@@ -29,6 +31,17 @@
     let availableHours = $derived(
         isDayOff ? [9, 13, 18] : [8, 13, 18]
     );
+
+    function addWorkersFromVoice(result: SelectedWorker[]) {
+        selectedWorkers = [
+            ...selectedWorkers,
+            ...result.filter(
+                newWorker => !selectedWorkers.some(
+                    oldWorker => oldWorker.worker === newWorker.worker
+                )
+            )
+        ];
+    }
 
     function isSelected(workerId: string) {
         return selectedWorkers.some((item) => item.worker === workerId);
@@ -100,7 +113,7 @@
                 isOpen = true;
             }}
         />
-
+        <TipsVoiceRecorder onResult={addWorkersFromVoice} />
         {#if isOpen}
             <div class="dropdown">
                 {#each filteredWorkers as worker}
@@ -226,6 +239,9 @@
     }
     .search-block {
         position: relative;
+        display: flex;
+        align-items: center;
+        gap: 15px;
         .search {
             width: 100%;
             height: 50px;
