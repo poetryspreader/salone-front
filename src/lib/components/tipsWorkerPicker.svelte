@@ -264,6 +264,7 @@
             overflow-y: auto;
             padding: 8px;
             gap: 8px;
+            z-index: 1;
             .dropdown-item {
                 position: relative;
                 display: flex;
@@ -363,7 +364,7 @@
         grid-template-columns: 1fr 90px 40px;
         gap: 8px;
         align-items: center;
-        padding: 12px;
+        padding: 12px 20px;
         border: 1px solid #eee;
         border-radius: 12px;
         background: #fff;
@@ -375,6 +376,7 @@
             border-radius: 10px;
             border: 1px solid #ccc;
             padding: 0 10px;
+            font-size: 16px;
         }
         .trash {
             border: none;

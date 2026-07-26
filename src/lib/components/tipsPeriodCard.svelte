@@ -218,6 +218,7 @@
     }
 
     .extra-card-input {
+        max-width: 100px;
         width: 100%;
         height: 48px;
         padding: 0 14px;
@@ -235,6 +236,6 @@
     .extra-cards {
         display: flex;
         flex-direction: row;
-        gap: 10px;
+        gap: 30px;
     }
 </style>

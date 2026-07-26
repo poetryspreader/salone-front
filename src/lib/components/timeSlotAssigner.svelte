@@ -129,13 +129,14 @@
     }
 
     function updateCoefficient(slotKey: string, workerId: string, value: string) {
+        const coefficient = Math.round(Number(value) * 10) / 10;
         slots = slots.map(s =>
             s.key === slotKey
                 ? {
                     ...s,
                     workers: s.workers.map(w =>
                         w.worker === workerId
-                            ? { ...w, baseCoefficient: Number(value) }
+                            ? { ...w, baseCoefficient: coefficient }
                             : w
                     )
                 }
@@ -174,9 +175,6 @@
                     <div class="slot-title">
                         {slot.label}
                     </div>
-                    <div class="slot-count">
-                        workers: <b>{slot.workers.length}</b>
-                    </div>
                 </div>
 
                 {#if slot.workers.length > 0}
@@ -189,25 +187,49 @@
                                 <div>
                                     start: <b>{item.shiftStart}</b>
                                 </div>
-                                <div>
-                                    coefficient:
-                                    <input
-                                        id={`coef-${item.baseCoefficient}`}
-                                        class="coefficient-input"
-                                        type="text"
-                                        inputmode="decimal"
-                                        value={item.baseCoefficient}
-                                        oninput={(e) => {
+                                <div class="coef">
+                                    coef:
+                                    <div class="coef__control">
+                                        <button
+                                            class="coef__btn"
+                                            onclick={() => updateCoefficient(slot.key, item.worker, String(item.baseCoefficient - 0.1))}
+                                        >
+                                            −
+                                        </button>
+                                        <input
+                                                id={`coef-${item.baseCoefficient}`}
+                                                class="coef__input"
+                                                type="text"
+                                                inputmode="decimal"
+                                                value={item.baseCoefficient}
+                                                oninput={(e) => {
                                             const value = e.currentTarget.value.replace(',', '.')
                                             updateCoefficient(slot.key, item.worker, value);
                                         }}
-                                    />
+                                        />
+                                        <button
+                                                class="coef__btn"
+                                                onclick={() => updateCoefficient(slot.key, item.worker, String(item.baseCoefficient + 0.1))}
+                                        >
+                                            +
+                                        </button>
+                                    </div>
                                 </div>
+<!--                                <button-->
+<!--                                        class="trash"-->
+<!--                                        onclick={() => removeWorkerFromSlot(slot.key, item.worker)}-->
+<!--                                >-->
+<!--                                    🗑️-->
+<!--                                </button>-->
                                 <button
-                                        class="trash"
-                                        onclick={() => removeWorkerFromSlot(slot.key, item.worker)}
+                                    type="button"
+                                    class="remove-btn"
+                                    onclick={(e) => {
+                                        e.stopPropagation();
+                                        removeWorkerFromSlot(slot.key, item.worker);
+                                    }}
                                 >
-                                    🗑️
+                                    ✕
                                 </button>
                             </div>
                         {/each}
@@ -239,7 +261,7 @@
     }
 
     .slot-card {
-        padding: 14px 10px;
+        padding: 14px;
         border: 1px solid #e6e6e6;
         border-radius: 16px;
         background: #fff;
@@ -257,11 +279,6 @@
         font-weight: 700;
     }
 
-    .slot-count {
-        font-size: 13px;
-        color: #666;
-    }
-
     .workers {
         display: flex;
         flex-direction: column;
@@ -274,31 +291,55 @@
         align-items: center;
         justify-content: space-between;
         gap: 20px;
-        padding: 8px 10px;
+        padding: 8px 35px 8px 8px;
         border-radius: 10px;
         background: #f4f6fb;
-        font-size: 14px;
+        font-size: 15px;
+        position: relative;
     }
 
-    .coefficient-input {
-        width: 70px;
+    .coef {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .coef__input {
+        width: 40px;
         height: 32px;
         border-radius: 8px;
         border: 1px solid #ccc;
         padding: 0 8px;
+        font-size: 16px;
     }
 
-    .trash {
-        border: none;
-        background: #f5f5f5;
-        border-radius: 10px;
-        height: 40px;
-        width: 40px;
+    .coef__control {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+    }
+
+    .coef__btn {
+        width: 28px;
+        height: 32px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background: #fff;
         cursor: pointer;
+        font-size: 18px;
     }
 
-    .trash:hover {
-        background: #fecaca;
+    .coef__btn:hover {
+        background: #f5f5f5;
+    }
+
+    .remove-btn {
+        position: absolute;
+        top: 2px;
+        right: 1px;
+        border: none;
+        cursor: pointer;
+        background: transparent;
     }
 
 </style>
