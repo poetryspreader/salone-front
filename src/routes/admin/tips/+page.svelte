@@ -53,15 +53,20 @@
     let totalPerWorker = $state<TotalPerWorker[]>([]);
     let isLoading = $state(false);
 
-    onMount(async () => {
+    let workersLoaded = false;
+
+    $effect(async () => {
+        if (!$token || workersLoaded) {
+            return;
+        }
+
         try {
-            if (!$token) {
-                return;
-            }
+            workersLoaded = true;
+
             const res = await fetch(`${PUBLIC_API_URL}/api/workers`, {
                 headers: {
                     Authorization: `Bearer ${$token}`
-                },
+                }
             });
 
             if (!res.ok) {
@@ -69,11 +74,10 @@
             }
 
             workers = await res.json();
-
         } catch (error) {
             console.error("Failed to load workers:", error);
-
             workers = [];
+            workersLoaded = false; // чтобы можно было повторить попытку
         }
     });
 
