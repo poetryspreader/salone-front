@@ -320,8 +320,11 @@
     }
 
     .coef__btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 28px;
-        height: 24px;
+        height: 28px;
         border: 1px solid #ccc;
         border-radius: 8px;
         background: #fff;
