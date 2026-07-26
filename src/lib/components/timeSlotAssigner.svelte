@@ -321,7 +321,7 @@
 
     .coef__btn {
         width: 28px;
-        height: 32px;
+        height: 24px;
         border: 1px solid #ccc;
         border-radius: 8px;
         background: #fff;
