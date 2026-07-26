@@ -261,7 +261,7 @@
     }
 
     .slot-card {
-        padding: 14px;
+        padding: 5px;
         border: 1px solid #e6e6e6;
         border-radius: 16px;
         background: #fff;
@@ -277,6 +277,7 @@
     .slot-title {
         font-size: 16px;
         font-weight: 700;
+        margin: 0 auto;
     }
 
     .workers {
